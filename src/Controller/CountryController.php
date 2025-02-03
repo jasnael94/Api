@@ -1,20 +1,20 @@
 <?php
+namespace App\Controller;
 
-namespace App\Service;
+use App\Service\CountriesService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-
-class CountriesService
+class CountryController extends AbstractController
 {
-    public function __construct(private HttpClientInterface $httpClient) {}
-
-    public function getAllCountries(): array
+    #[Route('/countries', name: 'app_countries')]
+    public function index(CountriesService $countriesService): Response
     {
-        try {
-            $response = $this->httpClient->request('GET', 'https://restcountries.com/v3.1/all');
-            return $response->toArray();
-        } catch (\Exception $e) {
-            return [];
-        }
+        $countries = $countriesService->getAllCountries();
+        
+        return $this->render('country/index.html.twig', [
+            'countries' => $countries
+        ]);
     }
 }
