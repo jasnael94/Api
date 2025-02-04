@@ -8,10 +8,10 @@ class JobOfferService
     private $httpClient;
     private $apiKey;
 
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(HttpClientInterface $httpClient , string $apiKey)
     {
         $this->httpClient = $httpClient;
-        $this->apiKey = getenv('FRANCE_TRAVAIL_API_KEY');  // Récupérer la clé API depuis l'environnement
+        $this->apiKey = $apiKey;  // Récupérer la clé API depuis l'environnement
     }
 
     // Obtenir les offres d'emploi
@@ -20,7 +20,7 @@ class JobOfferService
         $url = "https://api.francetravail.io/partenaire/offresdemploi?query={$searchQuery}&page={$page}&per_page={$perPage}";
 
         // Effectuer la requête avec la clé API dans l'en-tête Authorization
-        $response = $this->httpClient->request('GET', $url, [
+        $response = $this->httpClient->request('POST', $url, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->apiKey,  // Utilisation de la clé API
             ]
