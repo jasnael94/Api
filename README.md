@@ -1,4 +1,4 @@
-# Projet API Countries & News
+# Projet API Countries,News & Job Offres
 
 Application Symfony intégrant les APIs REST Countries et NewsAPI.
 
