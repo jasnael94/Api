@@ -17,32 +17,5 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="col-md-6">
-            <h2>Pays</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Drapeau</th>
-                        <th>Nom</th>
-                        <th>Capitale</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for country in countries|slice(0, 10) %}
-                    <tr>
-                        <td>
-                            <img src="{{ country.flags.svg }}" 
-                                 alt="Drapeau {{ country.name.common }}" 
-                                 width="50"
-                            >
-                        </td>
-                        <td>{{ country.name.common }}</td>
-                        <td>{{ country.capital.0 ?? 'N/A' }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+
 {% endblock %}
