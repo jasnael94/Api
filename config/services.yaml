@@ -30,6 +30,13 @@ services:
         arguments:
             $httpClient: '@http_client'
             $apiKey: '%france_travail_api_key%'  # Injection de la clé API
+    
+    App\Service\AdzunaService:
+        arguments:
+            $client: '@http_client'
+            $adzunaId: '%env(ADZUNA_ID)%'
+            $adzunaKey: '%env(ADZUNA_KEY)%'
+            $baseUrl: '%env(ADZUNA_BASE_URL)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
