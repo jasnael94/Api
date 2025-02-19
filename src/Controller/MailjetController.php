@@ -31,8 +31,8 @@ class MailjetController extends AbstractController
 
         // Envoi de l'email
         $emailSent = $this->mailjetService->sendEmailFromTemplate(
-            'mail4@icloud.com', // Destinataire
-            'Mr', // Nom du destinataire
+            'example@gmail.com', // Destinataire
+            'Member1', // Nom du destinataire
             $templateId, // ID du template Mailjet
             $variables // Variables dynamiques à insérer
         );
