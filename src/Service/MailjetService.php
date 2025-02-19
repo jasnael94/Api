@@ -26,8 +26,8 @@ class MailjetService
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => 'your-email@domain.com',
-                        'Name' => 'Your Name'
+                        'Email' => 'jasnael94@gmail.com',
+                        'Name' => 'Jason'
                     ],
                     'To' => [
                         [

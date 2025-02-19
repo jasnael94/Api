@@ -2,17 +2,45 @@
 
 namespace App\Controller;
 
+use App\Service\MailjetService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
-final class MailjetController extends AbstractController
+class MailjetController extends AbstractController
 {
-    #[Route('/mailjet', name: 'app_mailjet')]
-    public function index(): Response
+    private $mailjetService;
+
+    public function __construct(MailjetService $mailjetService)
     {
-        return $this->render('mailjet/index.html.twig', [
-            'controller_name' => 'MailjetController',
-        ]);
+        $this->mailjetService = $mailjetService;
+    }
+
+    #[Route('/send-email', name: 'send_email')]
+    public function sendEmail(): Response
+    {
+        // Variables à insérer dans le template
+        $variables = [
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'some_other_variable' => 'Value'
+        ];
+
+        // ID du template Mailjet
+        $templateId = 6740222; // Remplacez par l'ID réel de votre template Mailjet
+
+        // Envoi de l'email
+        $emailSent = $this->mailjetService->sendEmailFromTemplate(
+            'mail4@icloud.com', // Destinataire
+            'Mr', // Nom du destinataire
+            $templateId, // ID du template Mailjet
+            $variables // Variables dynamiques à insérer
+        );
+
+        if ($emailSent) {
+            return $this->json(['status' => 'Email sent successfully']);
+        }
+
+        return $this->json(['status' => 'Failed to send email']);
     }
 }
