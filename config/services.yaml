@@ -4,8 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    france_travail_api_key: '%env(FRANCE_TRAVAIL_API_KEY)%'
-
+    
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,21 +21,21 @@ services:
             - '../src/Kernel.php'
         # config/services.yaml
 
-    App\Service\NewsService:
-        arguments:
-            $newsApiKey: '%env(NEWS_API_KEY)%'
 
-    App\Service\JobOfferService:
-        arguments:
-            $httpClient: '@http_client'
-            $apiKey: '%france_travail_api_key%'  # Injection de la clé API
-    
     App\Service\AdzunaService:
         arguments:
             $client: '@http_client'
             $adzunaId: '%env(ADZUNA_ID)%'
             $adzunaKey: '%env(ADZUNA_KEY)%'
             $baseUrl: '%env(ADZUNA_BASE_URL)%'
+    
+        # Injection des paramètres dans le contrôleur
+    App\Controller\AdzunaController:
+        arguments:
+            $baseUrl: '%env(ADZUNA_BASE_URL)%'
+            $adzunaId: '%env(ADZUNA_APP_ID)%'
+            $adzunaKey: '%env(ADZUNA_APP_KEY)%'
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

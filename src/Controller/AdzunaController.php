@@ -8,13 +8,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class AdzunaController extends AbstractController
 {
     private AdzunaService $adzunaApi;
+    private string $baseUrl;
+    private string $adzunaId;
+    private string $adzunaKey;
 
-    public function __construct(AdzunaService $adzunaApi)
+    public function __construct(AdzunaService $adzunaApi ,$baseUrl, $adzunaId, $adzunaKey)
     {
         $this->adzunaApi = $adzunaApi;
+        $this->baseUrl = $baseUrl;
+        $this->adzunaId = $adzunaId;
+        $this->adzunaKey = $adzunaKey;
     }
 
     #[Route('/adzuna', name: 'app_adzuna')]
