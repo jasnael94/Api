@@ -3,6 +3,7 @@
         "symfony/security-bundle": "^7.2",
         "symfony/orm-pack": "^2.4",
         "doctrine/orm": "^3.3",
-        "symfony/maker-bundle": "^1.62"
+        "symfony/maker-bundle": "^1.62",
+        "twig/twig": "^3.20"
     }
 }
